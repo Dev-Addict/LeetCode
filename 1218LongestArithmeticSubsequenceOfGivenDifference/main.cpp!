@@ -1,0 +1,21 @@
+#include<vector>
+#include<unordered_map>
+#include<algorithm>
+#include<cstdlib>
+using namespace std;
+
+class Solution {
+public:
+  int longestSubsequence(vector<int>& arr, int difference) {
+    int result = 0;
+    unordered_map<int, int> sequences;
+
+    for (int num : arr) {
+      sequences[num] = sequences[num - difference] + 1;
+      result = max(result, sequences[num]);
+    }
+
+    return result;
+  }
+};
+
