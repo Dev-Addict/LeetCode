@@ -1,0 +1,28 @@
+#include<vector>
+using namespace std;
+
+class Solution {
+public:
+  int numTeams(vector<int>& rating) {
+    int n = rating.size(), result = 0;
+
+    vector<int> smallerBefore(n, 0), smallerAfter(n, 0), biggerBefore(n, 0), biggerAfter(n, 0);
+
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < i; j++) {
+        smallerBefore[i] += rating[j] < rating[i];
+        biggerBefore[i] += rating[j] > rating[i];
+      }
+      for (int j = i + 1; j < n; j++) {
+        smallerAfter[i] += rating[j] < rating[i];
+        biggerAfter[i] += rating[j] > rating[i];
+      }
+    }
+
+    for (int i = 1; i < n - 1; i++)
+      result += smallerBefore[i] * biggerAfter[i] + biggerBefore[i] * smallerAfter[i];
+
+    return result;
+  }
+};
+
