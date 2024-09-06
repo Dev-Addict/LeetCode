@@ -1,0 +1,44 @@
+#include <vector>
+using namespace std;
+
+struct ListNode {
+  int val;
+  ListNode *next;
+  ListNode() : val(0), next(nullptr) {}
+  ListNode(int x) : val(x), next(nullptr) {}
+  ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+  ListNode *modifiedList(vector<int> &nums, ListNode *head) {
+    if (head == nullptr) {
+      return head;
+    }
+
+    int i{0};
+    int n = nums.size();
+
+    while (i < n && head != nullptr && nums[i] == head->val) {
+      head = head->next;
+      i++;
+    }
+
+    if (head == nullptr || i == n - 1) {
+      return head;
+    }
+
+    ListNode *current = head;
+
+    while (i < n && current->next != nullptr) {
+      if (nums[i] == current->next->val) {
+        current->next = current->next->next;
+        i++;
+      } else {
+        current = current->next;
+      }
+    }
+
+    return head;
+  }
+};
