@@ -15,9 +15,10 @@ public:
 
     if (zeroes >= 2)
       return vector<int>(nums.size(), 0);
-    if (zeroes == 1) {
-      vector<int> result(nums.size(), 0);
 
+    vector<int> result(nums.size(), 0);
+
+    if (zeroes == 1) {
       for (int i = 0; i < nums.size(); i++)
         if (nums[i] == 0) {
           result[i] = productTotal;
@@ -25,8 +26,6 @@ public:
           return result;
         }
     }
-
-    vector<int> result(nums.size());
 
     for (int i = 0; i < nums.size(); i++)
       result[i] = productTotal / nums[i];
